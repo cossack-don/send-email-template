@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>email form + php</title>
+</head>
+<body>
+
+<div id="app">
+  <!-- app -->
+  <h1> {{ title }} </h1>
+
+  <form @submit.prevent="clickBtnForm">
+
+    <div class="form-item" >
+        <label >Name:</label>
+        <input v-model="name" >
+    </div>
+
+    <div class="form-item" >
+        <label>Email:</label>
+        <input v-model="email" >
+    </div>
+
+    <button class="btn btnPrimary">Submit</button>
+  </form>
+
+</div>
+
+
+<script>
+  var app = new Vue({
+    el: '#app',
+
+    data: {
+      title: 'Email form + php',
+      name:'',
+      email:'',
+    },
+
+    methods: {
+
+        clickBtnForm() {
+
+            console.log(this.email,this.name);
+
+            axios
+            .post('/email/email.php', {
+                name:this.name,
+                email:this.email
+            })
+
+        this.name = '',
+        this.email = ''
+    }
+
+  }
+  })
+</script>
+
+</body>
+</html>
